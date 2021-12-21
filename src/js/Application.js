@@ -59,8 +59,9 @@ export default class Application extends EventEmitter {
       `https://swapi.boom.dev/api/planets?page=6`
     ]; 
 
+    
     const responses = await Promise.all(
-      urls.map(url => fetch(url).then(res => res.json()))
+      urls.map(url => fetch(url).then(res => res.json()).then(this._loading.style.display = "none"))
     );
   }
 
