@@ -55,7 +55,8 @@ export default class Application extends EventEmitter {
       `https://swapi.boom.dev/api/planets?page=2`,
       `https://swapi.boom.dev/api/planets?page=3`,
       `https://swapi.boom.dev/api/planets?page=4`,
-      `https://swapi.boom.dev/api/planets?page=5`
+      `https://swapi.boom.dev/api/planets?page=5`,
+      `https://swapi.boom.dev/api/planets?page=6`
     ]; 
 
     const responses = await Promise.all(
