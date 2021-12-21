@@ -11,6 +11,8 @@ export default class Application extends EventEmitter {
   constructor() {
     super();
 
+    this._loading = document.querySelector(".progress");
+
     const box = document.createElement("div");
     box.classList.add("box");
     box.innerHTML = this._render({
@@ -47,7 +49,7 @@ export default class Application extends EventEmitter {
     `;
   }
 
-  _load() {
+  async _load() {
     let url = `https://swapi.boom.dev/api/planets`;
     async function fetchPlanets() {
       let response = await fetch(url);
