@@ -30,35 +30,37 @@ export default class Application extends EventEmitter {
 
   _render({ name, terrain, population }) {
     return `
-<article class="media">
-  <div class="media-left">
-    <figure class="image is-64x64">
-      <img src="${image}" alt="planet">
-    </figure>
-  </div>
-  <div class="media-content">
-    <div class="content">
-    <h4>${name}</h4>
-      <p>
-        <span class="tag">${terrain}</span> <span class="tag">${population}</span>
-        <br>
-      </p>
-    </div>
-  </div>
-</article>
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="${image}" alt="planet">
+        </figure>
+      </div>
+      <div class="media-content">
+        <div class="content">
+        <h4>${name}</h4>
+          <p>
+            <span class="tag">${terrain}</span> <span class="tag">${population}</span>
+            <br>
+          </p>
+        </div>
+      </div>
+    </article>
     `;
   }
 
   async _load() {
-    let url = `https://swapi.boom.dev/api/planets`;
-    async function fetchPlanets() {
-      let response = await fetch(url);
-      response = await response.json();
-      console.log(response);
-    }
+    let urls = [
+      `https://swapi.boom.dev/api/planets`,
+      `https://swapi.boom.dev/api/planets?page=2`,
+      `https://swapi.boom.dev/api/planets?page=3`,
+      `https://swapi.boom.dev/api/planets?page=4`,
+      `https://swapi.boom.dev/api/planets?page=5`
+    ]; 
 
-    fetchPlanets();
-
+    const responses = await Promise.all(
+      urls.map(url => fetch(url).then(res => res.json()))
+    );
   }
 
   _create() {
